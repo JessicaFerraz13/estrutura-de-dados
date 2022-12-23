@@ -1,28 +1,31 @@
 from ListasEncadeadas import *
 
 class Tabela:
-    def __init__(self, Max = 20):
-        self.vetor = [None] * (Max * 2)
+    def __init__(self, Max = 7):
+        self.vetor = [None] * (Max * 2 + 1)
         self.tamanho = 0
 
-    def inserir(self, chave, valor):
-        posicao = chave % 27
-        if self.vetor[posicao] != None:
+    def imprimir(self):
+        for i in range(0, len(self.vetor)):
+            if self.vetor[i] == None:
+                print("Vazia")
+            else:
+                self.vetor[i].imprime()
+                print('\n')
 
+    def inserir(self, chave, info):
+        posicao = (chave % 15)
+        if self.vetor[posicao] == None:
+            self.vetor[posicao] = ListaEncad()
+        self.vetor[posicao].insere(chave, info)
 
     def consultar(self, chave):
-        posicao = self.buscar(chave, 'b')
-        if posicao > 0:
-            return self.valor[posicao]
+        posicao = (chave % 15)
+        if self.vetor[posicao] == None:
+            return False
+        return self.vetor[posicao].busca(chave)
 
     def excluir(self, chave):
-        posicao = self.buscar(chave, 'b')
-        if posicao > 0:
-            for i in range(posicao, self.fim):
-                self.chave[i] = self.chave[i + 1]
-                self.valor[i] = self.valor[i + 1]
-            self.fim = self.fim - 1
-
-    def destruir(self):
-        self.inicio = self.LI - 1
-        self.fim = self.LS + 1
+        posicao = (chave % 15)
+        if self.vetor[posicao] != None:
+            self.vetor[posicao].exclui(chave)

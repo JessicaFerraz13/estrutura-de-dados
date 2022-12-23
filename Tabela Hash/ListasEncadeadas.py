@@ -6,55 +6,34 @@ class Nodo:
 class ListaEncad:
     def __init__(self):
         self.inicio = None
-    def vazia(self):
-        return self.inicio == None
-    def exclui(self, posicao):
-        if (not self.vazia() and posicao > 0):
-            if posicao == 1:
-                self.inicio = self.inicio.prox
-            else:
-                i=1
-                aux = self.inicio
-                ant = None
-                while (i< posicao and aux != None):
-                    ant = aux
-                    aux = aux.prox
-                    i = i +1
-                if aux != None:
-                    ant.prox = aux.prox
-    def insere(self, posicao, valor):
-        if posicao > 0:
-            novo = Nodo(valor)
-            if posicao == 1:
-                novo.prox = self.inicio
-                self.inicio = novo
-            else:
-                aux = self.inicio
-                i = 1
-                while (i < posicao - 1 and aux != None):
-                    aux = aux.prox
-                    i = i + 1
-                if aux != None:
-                    novo.prox = aux.prox
-                    aux.prox = novo
-    def posicao(self, valor):
+
+    def imprime(self):
         aux = self.inicio
-        i = 1
         while aux != None:
-            if aux.info == valor:
-                return i
-            aux = aux.prox
-            i = i + 1
-        return 0
-    def valor(self, posicao):
-        if posicao > 0:
+            print('Número: '+ str(aux.info.getnumero()) + ', Nome: ' + aux.info.getnome(), end="   ")
+            aux=aux.prox
+
+    def exclui(self, chave):
+        if chave == self.inicio.chave:
+            self.inicio = self.inicio.prox
+        else:
             aux = self.inicio
-            i = 1
-            while (i < posicao and aux != None):
+            ant = None
+            while (chave != aux.chave and aux != None):
+                ant = aux
                 aux = aux.prox
-                i = i + 1
-            if (i == posicao and aux != None):
+            if aux != None:
+                ant.prox = aux.prox
+    
+    def insere(self, chave, info):
+        novo = Nodo(chave, info)
+        novo.prox = self.inicio
+        self.inicio = novo
+
+    def busca(self, chave):
+        aux = self.inicio
+        while aux != None:
+            if aux.chave == chave:
                 return aux.info
-        return 'Posição inválida'
-    def destroi(self):
-        self.inicio = None
+            aux = aux.prox
+        return False

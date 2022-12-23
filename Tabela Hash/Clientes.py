@@ -1,13 +1,10 @@
 class Clientes:
-    def __init__(self, cpf, nome, profissao):
-        self.cpf = cpf
+    def __init__(self, numero, nome):
+        self.numero = numero
         self.nome = nome
-        self.profissao = profissao
     def __repr__(self):
-        return "CPF: " + str(self.cpf) + ", Nome: " + self.nome + ', Profissão: ' + self.profissao
-    def getcpf(self):
-        return self.cpf
+        return "Número: " + str(self.numero) + ", Nome: " + self.nome
+    def getnumero(self):
+        return self.numero
     def getnome(self):
         return self.nome
-    def getprofissao(self):
-        return self.profissao
