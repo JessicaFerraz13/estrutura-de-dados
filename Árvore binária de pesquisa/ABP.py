@@ -54,14 +54,22 @@ class Nodo:
             if self.dir:
                 return self.dir.buscar_pai(chave)
 
-    def folha(self):
-        return self.esq == None and self.dir == None
-
     def excluir(self, chave):
         nodo = self.buscar(chave)
         nodo_pai, esquerda = self.buscar_pai(chave)
-        if nodo.folha():
+        if nodo.esq == None and nodo.dir == None:
             if esquerda:
                 nodo_pai.esq = None
             else:
                 nodo_pai.dir = None
+        elif nodo.esq == None:
+            if esquerda:
+                nodo_pai.esq = nodo.dir
+            else:
+                nodo_pai.dir = nodo.dir
+        elif nodo.dir == None:
+            if esquerda:
+                nodo_pai.esq = nodo.esq
+            else:
+                nodo_pai.dir = nodo.esq
+        #else:
